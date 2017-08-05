@@ -4,11 +4,11 @@ import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 
 import java.util.ArrayList;
-import java.util.WeakHashMap;
+import java.util.HashMap;
 
 public class Configurator {
 
-    private static final WeakHashMap<String, Object> JUNO_CONFIGS = new WeakHashMap<>();
+    private static final HashMap<String, Object> JUNO_CONFIGS = new HashMap<>();
 
     private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
 
@@ -20,7 +20,7 @@ public class Configurator {
         return Holder.INSTANCE;
     }
 
-    final WeakHashMap<String, Object> getJunoConfigs() {
+    final HashMap<String, Object> getJunoConfigs() {
         return JUNO_CONFIGS;
     }
 
