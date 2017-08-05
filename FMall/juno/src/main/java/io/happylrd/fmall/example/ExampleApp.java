@@ -1,4 +1,4 @@
-package io.happylrd.fmall.juno;
+package io.happylrd.fmall.example;
 
 import android.app.Application;
 

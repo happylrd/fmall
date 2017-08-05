@@ -1,4 +1,4 @@
-package io.happylrd.fmall.juno;
+package io.happylrd.fmall.example;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
