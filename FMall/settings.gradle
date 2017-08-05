@@ -1,1 +1,1 @@
-include ':juno', ':juno-annotations', ':juno-compiler', ':juno-core', ':juno-ec'
+include ':example', ':juno-annotations', ':juno-compiler', ':juno-core', ':juno-ec'
