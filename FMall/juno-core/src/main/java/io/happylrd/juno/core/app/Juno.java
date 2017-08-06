@@ -2,24 +2,24 @@ package io.happylrd.juno.core.app;
 
 import android.content.Context;
 
-import java.util.HashMap;
-
 public final class Juno {
 
     public static Configurator init(Context context) {
-        getConfigurations().put(ConfigType.APPLICATION_CONTEXT.name(), context.getApplicationContext());
+        Configurator.getInstance()
+                .getJunoConfigs()
+                .put(ConfigKeys.APPLICATION_CONTEXT, context.getApplicationContext());
         return Configurator.getInstance();
     }
 
-    public static HashMap<String, Object> getConfigurations() {
-        return Configurator.getInstance().getJunoConfigs();
+    public static Configurator getConfigurator() {
+        return Configurator.getInstance();
     }
 
-    public static Context getApplication() {
-        return (Context) getConfigurations().get(ConfigType.APPLICATION_CONTEXT.name());
+    public static <T> T getConfiguration(Object key) {
+        return getConfigurator().getConfiguration(key);
     }
 
     public static Context getApplicationContext() {
-        return getApplication();
+        return getConfiguration(ConfigKeys.APPLICATION_CONTEXT);
     }
 }
