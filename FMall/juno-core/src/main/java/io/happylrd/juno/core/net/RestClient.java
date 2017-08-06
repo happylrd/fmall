@@ -1,5 +1,7 @@
 package io.happylrd.juno.core.net;
 
+import android.content.Context;
+
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -8,6 +10,8 @@ import io.happylrd.juno.core.net.callback.IFailure;
 import io.happylrd.juno.core.net.callback.IRequest;
 import io.happylrd.juno.core.net.callback.ISuccess;
 import io.happylrd.juno.core.net.callback.RequestCallbacks;
+import io.happylrd.juno.core.ui.JunoLoader;
+import io.happylrd.juno.core.ui.LoaderStyle;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,6 +25,8 @@ public class RestClient {
     private final IFailure FAILURE;
     private final IError ERROR;
     private final RequestBody BODY;
+    private final Context CONTEXT;
+    private final LoaderStyle LOADER_STYLE;
 
     public RestClient(String url,
                       Map<String, Object> params,
@@ -28,7 +34,9 @@ public class RestClient {
                       ISuccess success,
                       IFailure failure,
                       IError error,
-                      RequestBody body) {
+                      RequestBody body,
+                      Context context,
+                      LoaderStyle loaderStyle) {
         this.URL = url;
         PARAMS.putAll(params);
         this.REQUEST = request;
@@ -36,6 +44,8 @@ public class RestClient {
         this.FAILURE = failure;
         this.ERROR = error;
         this.BODY = body;
+        this.CONTEXT = context;
+        this.LOADER_STYLE = loaderStyle;
     }
 
     public static RestClientBuilder builder() {
@@ -48,6 +58,10 @@ public class RestClient {
 
         if (REQUEST != null) {
             REQUEST.onRequestStart();
+        }
+
+        if (LOADER_STYLE != null) {
+            JunoLoader.showLoading(CONTEXT, LOADER_STYLE);
         }
 
         switch (method) {
@@ -77,7 +91,8 @@ public class RestClient {
                 REQUEST,
                 SUCCESS,
                 FAILURE,
-                ERROR
+                ERROR,
+                LOADER_STYLE
         );
     }
 

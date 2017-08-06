@@ -1,5 +1,9 @@
 package io.happylrd.juno.core.net.callback;
 
+import android.os.Handler;
+
+import io.happylrd.juno.core.ui.JunoLoader;
+import io.happylrd.juno.core.ui.LoaderStyle;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -10,12 +14,15 @@ public class RequestCallbacks implements Callback<String> {
     private final ISuccess SUCCESS;
     private final IFailure FAILURE;
     private final IError ERROR;
+    private final LoaderStyle LOADER_STYLE;
+    private static final Handler HANDLER = new Handler();
 
-    public RequestCallbacks(IRequest request, ISuccess success, IFailure failure, IError error) {
+    public RequestCallbacks(IRequest request, ISuccess success, IFailure failure, IError error, LoaderStyle style) {
         this.REQUEST = request;
         this.SUCCESS = success;
         this.FAILURE = failure;
         this.ERROR = error;
+        this.LOADER_STYLE = style;
     }
 
     @Override
@@ -31,6 +38,8 @@ public class RequestCallbacks implements Callback<String> {
                 ERROR.onError(response.code(), response.message());
             }
         }
+
+        stopLoading();
     }
 
     @Override
@@ -41,6 +50,19 @@ public class RequestCallbacks implements Callback<String> {
 
         if (REQUEST != null) {
             REQUEST.onRequestEnd();
+        }
+
+        stopLoading();
+    }
+
+    private void stopLoading() {
+        if (LOADER_STYLE != null) {
+            HANDLER.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    JunoLoader.stopLoading();
+                }
+            }, 1000);
         }
     }
 }

@@ -26,6 +26,7 @@ public class ExampleDelegate extends JunoDelegate {
     private void testRestClient() {
         RestClient.builder()
                 .url("http://news.baidu.com")
+                .loader(getContext())
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
