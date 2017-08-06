@@ -11,6 +11,7 @@ import io.happylrd.juno.core.net.callback.IFailure;
 import io.happylrd.juno.core.net.callback.IRequest;
 import io.happylrd.juno.core.net.callback.ISuccess;
 import io.happylrd.juno.core.net.callback.RequestCallbacks;
+import io.happylrd.juno.core.net.download.DownloadHandler;
 import io.happylrd.juno.core.ui.JunoLoader;
 import io.happylrd.juno.core.ui.LoaderStyle;
 import okhttp3.MediaType;
@@ -23,6 +24,9 @@ public class RestClient {
 
     private final String URL;
     private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
+    private final String DOWNLOAD_DIR;
+    private final String EXTENSION;
+    private final String NAME;
     private final IRequest REQUEST;
     private final ISuccess SUCCESS;
     private final IFailure FAILURE;
@@ -34,6 +38,9 @@ public class RestClient {
 
     public RestClient(String url,
                       Map<String, Object> params,
+                      String downloadDir,
+                      String extension,
+                      String name,
                       IRequest request,
                       ISuccess success,
                       IFailure failure,
@@ -44,6 +51,9 @@ public class RestClient {
                       LoaderStyle loaderStyle) {
         this.URL = url;
         PARAMS.putAll(params);
+        this.DOWNLOAD_DIR = downloadDir;
+        this.EXTENSION = extension;
+        this.NAME = name;
         this.REQUEST = request;
         this.SUCCESS = success;
         this.FAILURE = failure;
@@ -143,5 +153,15 @@ public class RestClient {
 
     public final void delete() {
         request(HttpMethod.DELETE);
+    }
+
+    public final void upload() {
+        request(HttpMethod.UPLOAD);
+    }
+
+    public final void download() {
+        new DownloadHandler(URL, DOWNLOAD_DIR, EXTENSION, NAME,
+                REQUEST, SUCCESS, FAILURE, ERROR)
+                .handleDownload();
     }
 }

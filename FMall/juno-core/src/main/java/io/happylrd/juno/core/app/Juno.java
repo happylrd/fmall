@@ -18,4 +18,8 @@ public final class Juno {
     public static Context getApplication() {
         return (Context) getConfigurations().get(ConfigType.APPLICATION_CONTEXT.name());
     }
+
+    public static Context getApplicationContext() {
+        return getApplication();
+    }
 }
