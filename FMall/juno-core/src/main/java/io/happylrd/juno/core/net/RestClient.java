@@ -71,8 +71,14 @@ public class RestClient {
             case POST:
                 call = service.post(URL, PARAMS);
                 break;
+            case POST_RAW:
+                call = service.postRaw(URL, BODY);
+                break;
             case PUT:
                 call = service.put(URL, PARAMS);
+                break;
+            case PUT_RAW:
+                call = service.putRaw(URL, BODY);
                 break;
             case DELETE:
                 call = service.delete(URL, PARAMS);
@@ -101,11 +107,25 @@ public class RestClient {
     }
 
     public final void post() {
-        request(HttpMethod.POST);
+        if (BODY == null) {
+            request(HttpMethod.POST);
+        } else {
+            if (!PARAMS.isEmpty()) {
+                throw new RuntimeException("params must be null!");
+            }
+            request(HttpMethod.POST_RAW);
+        }
     }
 
     public final void put() {
-        request(HttpMethod.PUT);
+        if (BODY == null) {
+            request(HttpMethod.PUT);
+        } else {
+            if (!PARAMS.isEmpty()) {
+                throw new RuntimeException("params must be null!");
+            }
+            request(HttpMethod.PUT_RAW);
+        }
     }
 
     public final void delete() {
