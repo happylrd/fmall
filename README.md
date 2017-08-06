@@ -9,3 +9,4 @@ A naive mall app for learning android.
 - [Fragmentation](https://github.com/YoKeyword/Fragmentation)
 - [butterknife](https://github.com/JakeWharton/butterknife)
 - [android-iconify](https://github.com/JoanZapata/android-iconify)
+- [AVLoadingIndicatorView](https://github.com/81813780/AVLoadingIndicatorView)
