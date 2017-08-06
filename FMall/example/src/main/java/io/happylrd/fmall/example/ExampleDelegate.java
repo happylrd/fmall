@@ -3,6 +3,7 @@ package io.happylrd.fmall.example;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.Toast;
 
 import io.happylrd.juno.core.delegate.JunoDelegate;
 import io.happylrd.juno.core.net.RestClient;
@@ -19,16 +20,16 @@ public class ExampleDelegate extends JunoDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-
+        testRestClient();
     }
 
     private void testRestClient() {
         RestClient.builder()
-                .url("")
+                .url("http://news.baidu.com")
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-
+                        Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
                     }
                 })
                 .failure(new IFailure() {
@@ -43,6 +44,7 @@ public class ExampleDelegate extends JunoDelegate {
 
                     }
                 })
-                .build();
+                .build()
+                .get();
     }
 }
