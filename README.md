@@ -10,3 +10,5 @@ A naive mall app for learning android.
 - [butterknife](https://github.com/JakeWharton/butterknife)
 - [android-iconify](https://github.com/JoanZapata/android-iconify)
 - [AVLoadingIndicatorView](https://github.com/81813780/AVLoadingIndicatorView)
+- [Android-ConvenientBanner](https://github.com/saiwu-bigkoo/Android-ConvenientBanner)
+- [ViewPagerTransforms](https://github.com/ToxicBakery/ViewPagerTransforms)
