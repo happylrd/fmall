@@ -17,7 +17,7 @@ public class Configurator {
     private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
 
     private Configurator() {
-        JUNO_CONFIGS.put(ConfigKeys.CONFIG_READY.name(), false);
+        JUNO_CONFIGS.put(ConfigKeys.CONFIG_READY, false);
     }
 
     public static Configurator getInstance() {
@@ -34,11 +34,11 @@ public class Configurator {
 
     public final void configure() {
         initIcons();
-        JUNO_CONFIGS.put(ConfigKeys.CONFIG_READY.name(), true);
+        JUNO_CONFIGS.put(ConfigKeys.CONFIG_READY, true);
     }
 
     public final Configurator withApiHost(String host) {
-        JUNO_CONFIGS.put(ConfigKeys.API_HOST.name(), host);
+        JUNO_CONFIGS.put(ConfigKeys.API_HOST, host);
         return this;
     }
 
@@ -69,7 +69,7 @@ public class Configurator {
     }
 
     private void checkConfiguration() {
-        final boolean isReady = (boolean) JUNO_CONFIGS.get(ConfigKeys.CONFIG_READY.name());
+        final boolean isReady = (boolean) JUNO_CONFIGS.get(ConfigKeys.CONFIG_READY);
         if (!isReady) {
             throw new RuntimeException("Configuration is not ready,call configure");
         }
